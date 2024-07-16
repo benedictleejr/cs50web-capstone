@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{% block title %}Walk The Dog{% endblock %}</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="{% static 'walk_the_dog/styles.css' %}" rel="stylesheet">
+  <script src="{% static 'walk_the_dog/index.js' %}"></script>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="">Walk The Dog</a>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div class="navbar-links">
+      <a href="{% url 'index' %}">Calendar</a>
+      <a href="{% url 'view_profile' user.id %}">Profile</a>
+      <a href="{% url 'view_dogs' %}">Dogs</a>
+      <a href="{% url 'logout' %}">Log Out</a>
+    </div>
+    {% else %}
+    <div class="navbar-links">
+      <a href="{% url 'index' %}">Calendar</a>
+      <a href="{% url 'login' %}">Log In</a>
+      <a href="{% url 'register' %}">Register</a>
+    </div>
+    {% endif %}
+  </nav>
+  
+  <div class="body">
+    {% block body %}
+    {% endblock %}
+  </div>
+</body>
+
+{% block scripts %}
+{% endblock %}
+
+</html>

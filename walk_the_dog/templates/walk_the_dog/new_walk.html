@@ -1,0 +1,61 @@
+{% extends "walk_the_dog/layout.html" %}
+
+{% block body %}
+
+{% if message %}
+  <h1 class="error-message">{{ message }}</h1>
+{% endif %}
+
+<h1>Add A New Walk</h1>
+<hr>
+
+<div class="new-walk-div">
+  <form id="new-walk-form" action="{% url 'new_walk' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="date"><strong>Date:</strong></label>
+      <input type="date" id="date" name="date">
+    </div>
+
+    <div class="form-group">
+      <label for="time"><strong>Time:</strong></label>
+      <input type="time" id="time" name="time">
+    </div>
+
+    <div class="form-group">
+      <label for="duration"><strong>Duration (minutes):</strong></label>
+      <input type="number" id="duration" name="duration" min="0" step="1">
+    </div>
+
+    <div class="form-group">
+      <label for="walked_by"><strong>Walked By:</strong></label>
+      <select id="walked_by" name="walked_by">
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dog"><strong>Dog walked:</strong></label>
+      <select id="dog" name="dog">
+        {% for dog in dogs %}
+          <option value="{{ dog.id }}">{{ dog.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="completed"><strong>Completed?</strong></label>
+      <input type="checkbox" id="completed" name="completed">
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn-primary" value="Add">
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

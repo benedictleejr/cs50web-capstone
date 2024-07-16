@@ -1,0 +1,56 @@
+{% extends "walk_the_dog/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div id="todays-date">
+  <h1>View Dogs</h1>
+</div>
+
+<div class="dogs-grid">
+  {% for dog in page_obj %}
+  <div class="dog-div">
+    <img src="{{ dog.picture }}" alt="{{ dog.name }}"> <br>
+    <strong>Name:</strong> {{ dog.name }} <br>
+    <strong>Breed:</strong> {{ dog.breed }} <br>
+    <strong>Age:</strong> {{ dog.age }} <br>
+    <strong>Owners:</strong>
+    {% for owner in dog.owners.all %}
+    {{ owner.username }} <br>
+    {% empty %}
+    No owners found.
+    {% endfor %}
+    <br>
+    <strong>Special Instructions:</strong> {{ dog.special_instructions }} <br>
+    <button id="remove-dog-btn" class="btn-remove-dog" data-dogID="{{ dog.id }}">Remove Dog</button>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="new-walk-button-div">
+  <a href="{% url 'new_dog' %}"><button type="button" class="btn-primary">Add New Dog</button></a>
+</div>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+
+<div class="remove-dog-div"></div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'walk_the_dog/remove_dog.js' %}"></script>
+{% endblock %}

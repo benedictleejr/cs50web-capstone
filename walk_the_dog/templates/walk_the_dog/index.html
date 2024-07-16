@@ -1,0 +1,66 @@
+{% extends "walk_the_dog/layout.html" %}
+
+{% block body %}
+
+<div id="calendar-view">
+  <div id="todays-date">
+    <h1>{{ todays_date }}</h1>
+  </div>
+
+  {% if request.user.is_authenticated %}
+  <div id="calendar">  
+    
+    {% for date_obj in page_obj %}
+      <div id="{{ date_obj.date }}" class="date-column">
+
+        <h4 id="title-{{ date_obj.date }}">{{ date_obj.date }}</h4>
+
+        {% for walk in date_obj.walks.all %}
+        <div id="info-{{ walk.id }}" class="walk-info" data-walkID="{{ walk.walkID }}">
+          <strong>Time:</strong> <br>
+          {{ walk.time }} <br>
+          <strong>Dog walked:</strong> {{ walk.dog_walked.name }}
+        </div>
+
+        {% empty %}
+        <p>No walks scheduled for this date.</p>
+        {% endfor %}
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+  <div id="new-walk-button-div">
+    <a href="{% url 'new_walk' %}"><button type="button" class="btn-primary">Add New Walk</button></a>
+  </div>
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+  
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+  
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+
+  {% else %}
+    <h1><a href="{% url 'login' %}">Log in</a> to view Calendar!</h1>
+  {% endif %}
+</div>
+
+<div id="listing-view"></div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

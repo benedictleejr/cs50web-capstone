@@ -1,0 +1,29 @@
+{% extends "walk_the_dog/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div id="view-profile">
+  <h1>{{ username }}</h1>
+  
+  {% if picture %}
+    <img id="profile-pic" src="{{ picture }}" alt="{{ username }}'s Profile Picture" width="200">
+  {% else %}
+    <img src="https://cdn-icons-png.freepik.com/512/9706/9706583.png" width="200">
+  {% endif %}
+  <br>
+  <strong>Email:</strong> {{ user.email }} <br>
+  <strong>Walks Completed:</strong> {{ walks_completed }} <br>
+
+  {% if request.user == user %}
+  <button type="button" id="edit-profile" class="btn-primary" data-userID="{{ request.user.id }}">Edit</button>
+  {% endif %}
+</div>
+
+<div id="edit-profile-div"></div>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'walk_the_dog/edit_button.js' %}"></script>
+{% endblock %}
