@@ -114,7 +114,7 @@ There are no special libraries installed, so as long as you have Python and Djan
 
 1. Clone the repository:
 
-`git clone https://github.com/ivecookies/dog-walking-app.git`
+`git clone https://github.com/ivecookies/cs50web-capstone`
 
 `cd dog-walking-app`
 
