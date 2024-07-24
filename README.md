@@ -2,35 +2,58 @@
 **Submission by Benedict Lee**
 
 ### My dog, a Female British Bulldog named Diva!
-![My dog, a Female British Bulldog named Diva!](diva-picture.jpg)
+![My dog, a Female British Bulldog named Diva!](./images/diva-picture.jpg)
 
 ## 1. Motivation and Purpose
 The key motivation for this web app is to not only create something adequately complex for the final project, but to also build something useful to me and my family! It has been extremely rewarding to be able to put everything I've learned from university and from this course into building something tangible, that also provides utility to me.
 
 This web application aims to be one centralized platform to track, schedule and allocate dog walking duties within the family. It will allow users to manage dog profiles, assign or take up walk responsibilities, and track the dog-walking history.
 
-## 2. Overview
-The web app allows family members to create accounts, log in securely, and manage dog-walking schedules. Each user will have a username, email address, a URL to a profile picture and number of walks completed. Each dog has a profile detailing its name, breed, age, owners, a URL to a picture and any special instructions.
-Users can view and delete dog profiles, schedule walks, and view past walk history.
-The app also keeps track of people's dog-walking score, which increases everytime they walk the dog!
+## 2. Distinctiveness and Complexity
 
-## 3. Distinctiveness and Complexity
-  - This project, while it draws on the lessons learned from previous projects and applies it to this project, is **distinct** by nature as it implements a walk tracking app. In previous projects, we created a:
-    - **Project 0: Simple frontend for Google's search engine**
-      - From this preject I learned the basics of HTML and CSS, and how to use it to style my websites to look the way I want. This was applied in this project too, as I chose not to use Bootstrap to give me greater freedom in styling. 
-    - **Project 1: Wiki**
-      - This project taught me how to pass information around a web app, and how to modify information in the database using the web app. The lessons learned here were heavily applied in managing the more complex database system here.
-    - **Project 2: Commerce**
-      - This project reinforced what was learned in the previous project by increasing the complexity.
-    - **Project 3: Mail**
-      - This project was a great introduction to using Javascript in our programs, to dynamically render different views. I learned much of the basics I applied in this project from here.
-    - **Project 4: Network**
-      - This project built on the previous project's use of Javascript, where I learned how to integrate my HTML and Python files from Django with Javascript files to achieve much better program design and user experience. This project was challenging, but greatly helped me in achieving this final project.
+### Distinctiveness
+I believe my project satisfies the distinctiveness requirements, because this Dog-Walking Coordination Web App is uniquely designed to cater to the specific needs of managing dog-walking schedules within a family. Unlike previous projects in this course, this application introduces several distinct features:
 
-  - It also builds on the **complexity** of previous projects due to the **models used** in this project. Users, Walks and Dogs are intricately linked in multiple ways, which adds complexity to database management and user inputs in the project.
-  - The **complexity** was also higher than previous projects due to implementing more Javascript, which required more API calls and linking my back and frontend together.
-  - The web-app is also **mobile-responsive**, which added extra effort in using CSS to ensure the app is usable on a smaller screen as well.
+- **Walk Scheduling & Tracking System**
+  - Similar to previous projects, the web app allows family members to create accounts, log in securely.
+  - However, the similarities end there: Users can schedule walks, view upcoming walks in a calendar format, and track the history of past walks. The scheduling system is designed to handle multiple walks per day and provides a clear overview of the dog-walking duties within the family.
+  - The visual layout and navigation of the web app had to change to accommodate the calendar view and scheduling system, further adding to distinctiveness from previous projects
 
+- **Centralized Dog Profile Management**
+  - Each dog has a detailed profile that includes its name, breed, age, owners, a picture URL, and any special care instructions. This allows for comprehensive management of multiple dogs within a single platform.
+  - Users can manage dog profiles on the Dogs page, allowing them to view and delete dog profiles.
+
+- **User Profiles with Walk Tracking**
+  - Each user has a profile displaying their username, email address, profile picture, and the number of walks completed.
+  - By displaying the number of walks completed, it gamifies this aspect of daily tasks, encouraging family members to participate more actively in dog-walking duties.
+
+### Complexity
+I believe my project satisfies the complexity requirements as it surpasses the complexity of previous projects through several more advanced technical implementations:
+
+- **Complex Database Relationships**
+  - The app builds on the complexity of previous projects by using four interconnected models (User, Dog, Walk, Date_of_walks) with intricate relationships to ensure data integrity and efficient querying. 
+  - For example, each Walk is linked to both a User and a Dog, and the Date_of_walks model aggregates walk data by date to optimize display and management.
+  - This database design was a step-up in terms of complexity from previous projects, and incorporated several database design principles like database normalization.
+  - You can find the ER Diagram for the database below, in section 3.
+
+- **Advanced JavaScript Integration, for greater user experience**
+  - The front-end heavily relies on JavaScript to manage dynamic interactions. This includes using the Fetch API to handle asynchronous operations such as updating profile pictures, removing dogs, as well as adding and deleting walks. This level of JavaScript integration is much more complex than any previous project.
+  - The web app also includes intuitive navigation aids, such as a back button to return to the calendar view and confirmation dialogs for actions like deleting walks or removing dogs. These features are implemented using JavaScript, to enhance usability and ensure smooth interaction with the app.
+  - The more advanced used of Javascript in the app required me to implement more API functions in my views.py, to seamlessly link my backend and frontend together.
+  - More API functions also means more endpoint security, with elements like CSRF tokens and decorating with @login_required to ensure only authenticated users can access the main features. Additionally, authorization checks are implemented to enforce correct access levels.
+
+- **Mobile Responsiveness**
+  - Ensuring the application is mobile-responsive required extensive use of CSS media queries and responsive design principles. The layout adapts seamlessly to different screen sizes, providing a consistent user experience across devices.
+  - On a large screen like a laptop/PC, the website expands to fill the space and look visually pleasing.
+  - When viewed on a smaller screen like a handphone, the website will scale down to fit all the navigation tabs vertically instead of horizontally, and the calendar view also scales down to fit one screen.
+
+- **Custom CSS styling, without Bootstrap**
+  - To achieve the look and feel I desired, I chose not to use Bootstrap to give me greater freedom in styling.
+  - As a result, more time and effort was placed into designing and customizing my website with CSS. 
+
+
+## 3. Database Schema
+![My Database ER Diagram](./images/CS50%20Web%20Capstone%20Schema.png)
 
 ## 4. Technical Specifications
 
@@ -106,8 +129,11 @@ The app also keeps track of people's dog-walking score, which increases everytim
     - *remove_dog.js*: Javascript file where I handle all of the AJAX functionality on the Dogs view. Users can remove a dog without reloading the page, with this file.
 
 6. **Root Directory**
-    - *diva-picture.jpg*: one of my favourite pictures of my dog to be displayed in this README
+    - *images folder*
+      - *diva-picture.jpg*: one of my favourite pictures of my dog to be displayed in this README
+      - *CS50 Web Capstone Schema.png*: Image of the ER diagram of the database utilized in this project
     - *README.md*: detailed description of this project which you are reading now :D
+
 
 ## 6. How to Run the Application
 There are no special libraries installed, so as long as you have Python and Django installed there should be no issue!
